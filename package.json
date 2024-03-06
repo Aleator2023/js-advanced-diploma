@@ -8,7 +8,7 @@
     "build": "webpack --mode production",
     "dev": "webpack --mode development",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint . --fix"
   },
   "repository": {
     "type": "git",

@@ -1,3 +1,15 @@
+// src/js/Team.js
+import characterGenerator from './generators';
+
+function generateTeam(types, maxLevel, characterCount) {
+  const team = [];
+  const generator = characterGenerator(types, maxLevel);
+  for (let i = 0; i < characterCount; i++) {
+    team.push(generator.next().value);
+  }
+  return team;
+}
+
 /**
  * Класс, представляющий персонажей команды
  *
