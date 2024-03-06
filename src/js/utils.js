@@ -23,9 +23,27 @@
  * ```
  * */
 export function calcTileType(index, boardSize) {
-  // TODO: ваш код будет тут
+  const totalCells = boardSize * boardSize;
+  // Верхний левый угол
+  if (index === 0) return 'top-left';
+  // Верхний правый угол
+  if (index === boardSize - 1) return 'top-right';
+  // Нижний левый угол
+  if (index === totalCells - boardSize) return 'bottom-left';
+  // Нижний правый угол
+  if (index === totalCells - 1) return 'bottom-right';
+  // Верхняя граница
+  if (index < boardSize) return 'top';
+  // Нижняя граница
+  if (index >= totalCells - boardSize) return 'bottom';
+  // Левая граница
+  if (index % boardSize === 0) return 'left';
+  // Правая граница
+  if ((index + 1) % boardSize === 0) return 'right';
+  // Центр
   return 'center';
 }
+
 
 export function calcHealthLevel(health) {
   if (health < 15) {

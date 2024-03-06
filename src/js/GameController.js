@@ -1,3 +1,5 @@
+import  themes  from '../js/Themes.js';
+
 export default class GameController {
   constructor(gamePlay, stateService) {
     this.gamePlay = gamePlay;
@@ -5,19 +7,19 @@ export default class GameController {
   }
 
   init() {
-    // TODO: add event listeners to gamePlay events
+    this.gamePlay.drawUi(themes.prairie);
     // TODO: load saved stated from stateService
   }
 
-  onCellClick(index) {
+  //onCellClick(index) {
     // TODO: react to click
-  }
+  //}
 
-  onCellEnter(index) {
+  //onCellEnter(index) {
     // TODO: react to mouse enter
-  }
+ // }
 
-  onCellLeave(index) {
+  //onCellLeave(index) {
     // TODO: react to mouse leave
-  }
+ // }
 }
