@@ -1,4 +1,4 @@
-import  themes  from '../js/Themes.js';
+import themes from '../js/Themes.js';
 import { generateTeam } from './generators';
 import { Bowman } from './characters/Bowman';
 import { Swordsman } from './characters/swordsman.js';
@@ -6,17 +6,17 @@ import { Magician } from './characters/magician.js';
 import { Vampire } from './characters/Vampire';
 import { Undead } from './characters/undead.js';
 import { Daemon } from './characters/daemon.js';
-//import  GamePlay  from './GamePlay';
 import PositionedCharacter from './PositionedCharacter';
-
 
 export default class GameController {
   constructor(gamePlay, stateService) {
     this.gamePlay = gamePlay;
     this.stateService = stateService;
+
+    this.onCellEnter = this.onCellEnter.bind(this);
+    this.onCellLeave = this.onCellLeave.bind(this);
   }
 
-  
   init() {
     this.gamePlay.drawUi(themes.prairie);
 
@@ -64,6 +64,26 @@ export default class GameController {
     });
 
     this.gamePlay.redrawPositions([...positionedPlayerCharacters, ...positionedEnemyCharacters]);
+
+    // Подписываемся на событие входа указателя мыши в ячейку поля
+    this.gamePlay.addCellEnterListener(this.onCellEnter);
+  }
+
+  onCellEnter(index) {
+    const character = this.stateService.findCharacterByPosition(index);
+    if (character) {
+      const characterInfo = this.getCharacterInfo(character);
+      this.gamePlay.showCellTooltip(characterInfo, index);
+    }
+  }
+
+  // Метод, вызываемый при уходе курсора с ячейки с персонажем
+  onCellLeave(index) {
+    this.gamePlay.hideCellTooltip(index);
+  }
+
+  // Метод для формирования краткой информации о персонаже
+  getCharacterInfo(character) {
+    return `🎖${character.level} ⚔${character.attack} 🛡${character.defence} ❤${character.health}`;
   }
 }
-    
